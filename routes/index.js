@@ -4,38 +4,21 @@ const userModel = require('./users');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-   req.session.ban===true;
-  res.render('index', { title: 'Express' });
+
+  res.cookie("age",25);
+  res.render('index');
 });
 
-router.get('/create', async function(req, res, next) {
-  try {
-    const createdUser = await userModel.create({
-      username: 'faizan',
-      name: 'faizanzafar',
-      age: 45,
-    });
-    res.send(createdUser);
-  } catch (err) {
-    next(err);
-  }
+router.get('/read', function(req, res, next) {
+
+  console.log(req.cookies.age);
+  res.send("check");
 });
 
-router.get('/allusers', async function(req, res, next) {
-  console.log(req.session);
-  let allusers =await userModel.find();
-  console.log(allusers);
-  res.send(allusers);
-  
-});
+router.get('/', function(req, res, next) {
 
-router.get('/delete', async function(req, res, next) {
-  let allusers =await userModel.findOneAndDelete({
-    username:"harsh",
-  });
-  
-  res.send(deleteusers);
-  
+  res.clearCookie("age");
+  res.send('clear hogyai');
 });
 
 module.exports = router;
