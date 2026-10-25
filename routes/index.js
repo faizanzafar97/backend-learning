@@ -4,6 +4,7 @@ const userModel = require('./users');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+   req.session.ban===true;
   res.render('index', { title: 'Express' });
 });
 
@@ -21,6 +22,7 @@ router.get('/create', async function(req, res, next) {
 });
 
 router.get('/allusers', async function(req, res, next) {
+  console.log(req.session);
   let allusers =await userModel.find();
   console.log(allusers);
   res.send(allusers);
